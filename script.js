@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const leftShrubberies = document.getElementById("leftShrubberies");
   const submitBtn = document.getElementById("submitBtn");
   const min = 8;
-  const max = 10;
+  const max = 11;
   const mySolver = new Solver();
   var gridSize;
   var areas;
