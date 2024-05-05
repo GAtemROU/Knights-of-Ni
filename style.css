@@ -98,6 +98,7 @@ h1 {
 }
 
 #niBtn{
+  visibility: hidden;
   background-color: #4caf50; /* Green background color */
   color: white; /* White text color */
 }
