@@ -1,11 +1,14 @@
+import {Solver} from "./solver.js"
+
 document.addEventListener("DOMContentLoaded", function () {
   const shrubberiesContainer = document.querySelector(".shrubberiesContainer");
   const grid = document.querySelector(".grid");
   const regenerateBtn = document.getElementById("regenerateBtn");
   const leftShrubberies = document.getElementById("leftShrubberies");
   const submitBtn = document.getElementById("submitBtn");
-  const min = 3;
-  const max = 7;
+  const min = 8;
+  const max = 10;
+  const mySolver = new Solver();
   var gridSize;
   var areas;
   var shrubberiesPlaced = 0;
@@ -13,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const bigShift = 150;
   const smallShift = 90;
   var dragging = false;
+  var onlySolvable = true;
 
   const colorShifts = [
     [-smallShift, -smallShift, 0], // blue
@@ -21,6 +25,27 @@ document.addEventListener("DOMContentLoaded", function () {
     [-2 * smallShift, 0, 0],
     [0, -2 * smallShift, 0],
     [0, 0, -2 * smallShift],
+    [-1.5 * smallShift, 0, 0],
+    [0, -1.5 * smallShift, 0],
+    [0, 0, -1.5 * smallShift],
+    [-smallShift, -smallShift, 0], // blue
+    [-smallShift, 0, -smallShift], // green
+    [0, -smallShift, -smallShift], // red
+    [-2 * smallShift, 0, 0],
+    [0, -2 * smallShift, 0],
+    [0, 0, -2 * smallShift],
+    [-1.5 * smallShift, 0, 0],
+    [0, -1.5 * smallShift, 0],
+    [0, 0, -1.5 * smallShift],
+    [-smallShift, -smallShift, 0], // blue
+    [-smallShift, 0, -smallShift], // green
+    [0, -smallShift, -smallShift], // red
+    [-2 * smallShift, 0, 0],
+    [0, -2 * smallShift, 0],
+    [0, 0, -2 * smallShift],
+    [-1.5 * smallShift, 0, 0],
+    [0, -1.5 * smallShift, 0],
+    [0, 0, -1.5 * smallShift]
   ];
 
   function randomInt(min, max) {
@@ -79,6 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     }
+    mySolver.solveTask(areas);
   }
 
   function highlightArea(id) {
@@ -144,6 +170,10 @@ document.addEventListener("DOMContentLoaded", function () {
     clearShrubberies();
     generateGrid();
     generateAreas();
+    if (onlySolvable && !mySolver.isSolvable()) {
+      regenerateTask();
+      return;
+    }
     generateShrubbery();
   }
 
@@ -254,8 +284,5 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   })
-
-  
-
 
 });
